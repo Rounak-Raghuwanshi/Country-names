@@ -105,13 +105,13 @@ const CountryDetails = () => {
         </div>
       </div>
       {borders && borders.length > 0 && (
-            <div className=" ml-[33rem] mt-[-3rem] md:w-full">
+            <div className=" ml-[33rem] mt-[-3rem] md:w-2/3">
               <p>
                 <span className="font-medium md:mr-2 items-end text-end">Borders Countries:</span>{" "}
                 {borders.map((borderName) => (
                   <span
                     key={borderName}
-                    className="inline-block bg-white rounded-[2px] px-6 py-1 mr-2  mb-2 shadow-lg border border-gray-200"
+                    className="inline-block  bg-white rounded-[2px] px-6 py-1 mr-2  mb-2 shadow-lg border border-gray-200"
                   >
                     {borderName}
                   </span>

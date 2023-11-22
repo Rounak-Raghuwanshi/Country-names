@@ -7,7 +7,7 @@ import CountryDetails from './components/CountryDetailsSection/CountryDetails';
 function App() {
   return (
     <Router>
-      <div>
+      <div className='overflow-hidden'>
         <Navbar />
         <Routes>
           <Route path="/" element={<CountryList />} />
