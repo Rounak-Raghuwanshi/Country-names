@@ -24,11 +24,7 @@ const CountryDetails = () => {
   }, [countryName]);
 
   if (!country) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
+    return <Spinner/>
   }
 
   const {
