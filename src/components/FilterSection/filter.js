@@ -11,18 +11,18 @@ const Filter = ({ onSearch, onFilter }) => {
     setSearchTerm(e.target.value);
     onSearch(e.target.value);
   };
-
   const handleFilterChange = (region) => {
     setSelectedRegion(region);
-    onFilter(region);
+    onFilter(region, searchTerm);
     setDropdownOpen(false);
   };
-
+  
   const handleDefaultFilter = () => {
     setSelectedRegion("");
-    onFilter("");
+    onFilter("", searchTerm); 
     setDropdownOpen(false);
   };
+  
 
   return (
     <div className="mb-8 flex flex-col md:flex-row items-center justify-between relative">
@@ -36,6 +36,7 @@ const Filter = ({ onSearch, onFilter }) => {
           className="p-2 pl-10 w-full md:w-3/4 rounded-md focus:outline-none shadow-2xl border border-gray-200"
         />
       </div>
+      
       <div className="relative w-full md:w-1/4">
         <div
           className="p-2 w-full rounded-md focus:outline-none shadow-lg cursor-pointer flex items-center"
