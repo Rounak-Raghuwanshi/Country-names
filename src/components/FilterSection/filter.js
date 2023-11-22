@@ -25,18 +25,18 @@ const Filter = ({ onSearch, onFilter }) => {
 
   return (
     <div className="mb-8 flex flex-col md:flex-row items-center justify-between relative">
-      <div className="relative w-full md:w-1/2 mb-4 md:mb-0">
+      <div className="relative w-4/5 md:w-1/2 mb-4 md:mb-0 ">
         <IoMdSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         <input
           type="text"
           placeholder="Search for a country..."
           value={searchTerm}
           onChange={handleChange}
-          className="p-2 pl-10 w-full md:w-3/4 rounded-md focus:outline-none shadow-2xl border border-gray-200"
+          className="p-2 pl-10 w-full md:w-3/4 rounded-md focus:outline-none shadow-lg border border-gray-200"
         />
       </div>
 
-      <div className="relative w-full md:w-1/4">
+      <div className="relative  md:w-1/4 w-4/5">
         <div
           className="p-2 w-full rounded-md focus:outline-none shadow-lg cursor-pointer flex items-center border border-gray-200"
           onClick={() => setDropdownOpen(!dropdownOpen)}

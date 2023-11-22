@@ -5,12 +5,12 @@ import Spinner from '../CustomLoader/Customspinner';
 const CountryCard = ({ country }) => {
   // Check if the country object is defined
   if (!country) {
-    return  <Spinner/>; 
+    return <Spinner/>; 
   }
 
   const { flags, name, population, region, capital, cca3 } = country;
   if (!flags || !name || !population || !region || !capital || !cca3) {
-    return  <Spinner/>; 
+    return null; 
   }
 
   return (
