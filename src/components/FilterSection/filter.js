@@ -16,13 +16,12 @@ const Filter = ({ onSearch, onFilter }) => {
     onFilter(region, searchTerm);
     setDropdownOpen(false);
   };
-  
+
   const handleDefaultFilter = () => {
     setSelectedRegion("");
-    onFilter("", searchTerm); 
+    onFilter("", searchTerm);
     setDropdownOpen(false);
   };
-  
 
   return (
     <div className="mb-8 flex flex-col md:flex-row items-center justify-between relative">
@@ -36,19 +35,19 @@ const Filter = ({ onSearch, onFilter }) => {
           className="p-2 pl-10 w-full md:w-3/4 rounded-md focus:outline-none shadow-2xl border border-gray-200"
         />
       </div>
-      
+
       <div className="relative w-full md:w-1/4">
         <div
-          className="p-2 w-full rounded-md focus:outline-none shadow-lg cursor-pointer flex items-center"
+          className="p-2 w-full rounded-md focus:outline-none shadow-lg cursor-pointer flex items-center border border-gray-200"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <span className="mr-2">{selectedRegion || "Filter by Region"}</span>
+          <span className="mr-2 md:ml-2">{selectedRegion || "Filter by Region"}</span>
           <IoIosArrowDown className="absolute right-10" />
         </div>
         {dropdownOpen && (
           <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-md overflow-hidden shadow-lg">
             <div
-              className={`p-2 hover:bg-gray-100 cursor-pointer ${
+              className={`p-2 md:ml-2 hover:bg-gray-100 cursor-pointer ${
                 selectedRegion === "Africa" ? "bg-gray-100" : ""
               }`}
               onClick={() => handleFilterChange("Africa")}
@@ -56,7 +55,7 @@ const Filter = ({ onSearch, onFilter }) => {
               Africa
             </div>
             <div
-              className={`p-2 hover:bg-gray-100 cursor-pointer ${
+              className={`p-2 md:ml-2 hover:bg-gray-100 cursor-pointer ${
                 selectedRegion === "Americas" ? "bg-gray-100" : ""
               }`}
               onClick={() => handleFilterChange("Americas")}
@@ -64,7 +63,7 @@ const Filter = ({ onSearch, onFilter }) => {
               Americas
             </div>
             <div
-              className={`p-2 hover:bg-gray-100 cursor-pointer ${
+              className={`p-2 md:ml-2 hover:bg-gray-100 cursor-pointer ${
                 selectedRegion === "Asia" ? "bg-gray-100" : ""
               }`}
               onClick={() => handleFilterChange("Asia")}
@@ -72,7 +71,7 @@ const Filter = ({ onSearch, onFilter }) => {
               Asia
             </div>
             <div
-              className={`p-2 hover:bg-gray-100 cursor-pointer ${
+              className={`p-2 md:ml-2 hover:bg-gray-100 cursor-pointer ${
                 selectedRegion === "Europe" ? "bg-gray-100" : ""
               }`}
               onClick={() => handleFilterChange("Europe")}
@@ -80,7 +79,7 @@ const Filter = ({ onSearch, onFilter }) => {
               Europe
             </div>
             <div
-              className={`p-2 hover:bg-gray-100 cursor-pointer ${
+              className={`p-2 md:ml-2 hover:bg-gray-100 cursor-pointer ${
                 selectedRegion === "Oceania" ? "bg-gray-100" : ""
               }`}
               onClick={() => handleFilterChange("Oceania")}
@@ -88,7 +87,7 @@ const Filter = ({ onSearch, onFilter }) => {
               Oceania
             </div>
             <div
-              className={`p-2 hover:bg-gray-100 cursor-pointer`}
+              className={`p-2 md:ml-2 hover:bg-gray-100 cursor-pointer`}
               onClick={handleDefaultFilter}
             >
               Show All
