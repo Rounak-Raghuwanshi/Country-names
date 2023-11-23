@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { FaArrowLeft } from 'react-icons/fa';
 import Spinner from "../CustomLoader/Customspinner";
+import { useTheme } from "../../ThemeContextSection/ThemeContext";
 
 const CountryDetails = () => {
   const { countryName } = useParams();
   const [country, setCountry] = useState(null);
+  const {isDarkTheme} =useTheme();
 
   useEffect(() => {
     // Fetch country details based on the countryName parameter
@@ -24,7 +27,7 @@ const CountryDetails = () => {
   }, [countryName]);
 
   if (!country) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
   const {
@@ -52,25 +55,23 @@ const CountryDetails = () => {
   // Extract languages
   const languageNames = Object.values(languages || {}).join(", ");
 
-  // Extract borders
-  const border = borders?.join(", ");
-
   return (
-    <div className="container mx-auto mt-8">
-      <Link to={`/`}>
-        <button className="p-2 px-8 bg-white text-black font-semibold rounded-md shadow-lg border border-gray-200 mb-20 mt-8">
+    <div className="h-screen w-4/5 mx-auto flex flex-col">
+       <Link to={`/`}>
+        <button className={`p-2 px-8 ${isDarkTheme ? 'bg-gray-700 border-gray-800 text-white' : 'bg-white text-black'} font-semibold rounded-md shadow-lg border border-gray-200 mb-20 mt-8 flex items-center`}>
+          <FaArrowLeft className="mr-2 ml-[-1rem]" />
           Back
         </button>
       </Link>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="md:h-[300px] md:w-[430px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 flex-1">
+        <div className="md:h-[350px] md:w-[430px] shadow mb-2">
           <img
             src={flags?.svg}
             alt={`Flag of ${name}`}
             className="w-full h-full object-cover mb-4"
           />
         </div>
-        <div className="md:ml-20 ">
+        <div className="md:ml-20 md:mt-5">
           <h1 className="text-3xl font-semibold mb-4">{name}</h1>
           <p className="mb-1">
             <span className="font-medium">Native Name:</span> {nativeName}
@@ -88,9 +89,9 @@ const CountryDetails = () => {
             <span className="font-medium">Capital:</span> {capital?.[0]}
           </p>
         </div>
-        <div className="md:ml-10 md:mt-12">
+        <div className="md:ml-10 md:mt-[4.5rem]">
           <p className="mb-1">
-            <span className="font-medium">Top Level Domain:</span> {tld?.[0]}
+            <span className="font-medium">Top Level Domain:</span> {tld}
           </p>
           <p className="mb-1">
             <span className="font-medium">Currencies:</span> {currencyName}
@@ -101,20 +102,21 @@ const CountryDetails = () => {
         </div>
       </div>
       {borders && borders.length > 0 && (
-            <div className=" ml-[33rem] mt-[-3rem] md:w-2/3">
-              <p>
-                <span className="font-medium md:mr-2 items-end text-end">Borders Countries:</span>{" "}
-                {borders.map((borderName) => (
-                  <span
-                    key={borderName}
-                    className="inline-block  bg-white rounded-[2px] px-6 py-1 mr-2  mb-2 shadow-lg border border-gray-200"
-                  >
-                    {borderName}
-                  </span>
-                ))}
-              </p>
-            </div>
-          )}
+        <div className="absolute top-[33rem] left-[40rem] md:w-2/3">
+          <p>
+            <span className="font-medium md:mr-2 items-end text-end">Borders Countries:</span>{" "}
+            {borders.map((borderName) => (
+              <span
+                key={borderName}
+                className={`inline-block rounded-[2px] px-6 py-1 mr-2  mb-2 shadow-lg border border-gray-200 
+                ${isDarkTheme ? 'bg-gray-700 text-white border border-gray-800 '   : 'bg-white text-black'}`}
+              >
+                {borderName}
+              </span>
+            ))}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
