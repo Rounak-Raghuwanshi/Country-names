@@ -12,7 +12,6 @@ const CountryList = () => {
       try {
         const response = await fetch('https://restcountries.com/v3.1/all');
         const data = await response.json();
-        console.log('All countries:', data);
         setCountries(data);
         setFilteredCountries(data);
       } catch (error) {
@@ -22,6 +21,7 @@ const CountryList = () => {
 
     fetchData();
   }, []);
+  
 
   const handleSearch = (searchTerm) => {
     const filtered = countries.filter((country) => {

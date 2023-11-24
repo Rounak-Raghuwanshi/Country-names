@@ -7,23 +7,34 @@ import { useTheme } from "../../ThemeContextSection/ThemeContext";
 const CountryDetails = () => {
   const { countryName } = useParams();
   const [country, setCountry] = useState(null);
-  const {isDarkTheme} =useTheme();
+  const { isDarkTheme } = useTheme();
+
+  
+  const fetchCountryDetails = async (countryName) => {
+    try {
+      const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+      
+      if (response.status === 404) {
+        console.error("Country not found:", response.statusText);
+        return;
+      }
+  
+      const data = await response.json();
+  
+      if (Array.isArray(data) && data.length > 0) {
+        setCountry(data[0]);
+      } else {
+        console.error("Error fetching country details. Response:", data);
+      }
+    } catch (error) {
+      console.error("Error fetching country details:", error);
+    }
+  };
+  
 
   useEffect(() => {
-    // Fetch country details based on the countryName parameter
-    const fetchCountryDetails = async () => {
-      try {
-        const response = await fetch(
-          `https://restcountries.com/v3.1/name/${countryName}`
-        );
-        const [data] = await response.json();
-        setCountry(data);
-      } catch (error) {
-        console.error("Error fetching country details:", error);
-      }
-    };
-
-    fetchCountryDetails();
+    // Fetch country details when the component mounts or when countryName changes
+    fetchCountryDetails(countryName);
   }, [countryName]);
 
   if (!country) {
@@ -37,16 +48,13 @@ const CountryDetails = () => {
     subregion,
     capital,
     tld,
-    currencies,
     languages,
     borders,
   } = country;
 
   // Extract name
   const name = country.name?.common;
-  const nativeName = country.name?.nativeName
-    ? Object.values(country.name.nativeName)[0].common
-    : "";
+  const nativeName = country.name?.nativeName?.eng?.common || "";
 
   // Extract currencies
   const currencyKey = Object.keys(country.currencies || {})[0];
@@ -57,7 +65,7 @@ const CountryDetails = () => {
 
   return (
     <div className="h-screen w-4/5 mx-auto flex flex-col">
-       <Link to={`/`}>
+      <Link to={`/`}>
         <button className={`p-2 px-8 ${isDarkTheme ? 'bg-gray-700 border-gray-800 text-white' : 'bg-white text-black'} font-semibold rounded-md shadow-lg border border-gray-200 mb-20 mt-8 flex items-center`}>
           <FaArrowLeft className="mr-2 ml-[-1rem]" />
           Back
@@ -106,13 +114,15 @@ const CountryDetails = () => {
           <p>
             <span className="font-medium md:mr-2 items-end text-end">Borders Countries:</span>{" "}
             {borders.map((borderName) => (
-              <span
+              <Link
                 key={borderName}
-                className={`inline-block rounded-[2px] px-6 py-1 mr-2  mb-2 shadow-lg border border-gray-200 
-                ${isDarkTheme ? 'bg-gray-700 text-white border border-gray-800 '   : 'bg-white text-black'}`}
+                to={`/${borderName}`}
+                onClick={() => fetchCountryDetails(borderName)}
+                className={`inline-block rounded-[2px] px-6 py-1 mr-2 mb-2 shadow-lg border border-gray-200 
+                  ${isDarkTheme ? 'bg-gray-700 text-white border border-gray-800 ' : 'bg-white text-black'}`}
               >
                 {borderName}
-              </span>
+              </Link>
             ))}
           </p>
         </div>
