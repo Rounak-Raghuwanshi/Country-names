@@ -72,7 +72,7 @@ const CountryDetails = () => {
         </button>
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 flex-1">
-        <div className="md:h-[350px] md:w-[430px] shadow mb-2">
+        <div className="md:h-[300px] md:w-[350px] shadow mb-2">
           <img
             src={flags?.svg}
             alt={`Flag of ${name}`}

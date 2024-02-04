@@ -44,7 +44,7 @@ const handleFilter = (region, searchTerm) => {
   return (
     <div className="container mx-auto mt-8">
       <Filter onSearch={handleSearch} onFilter={handleFilter} />
-      <div className="grid grid-cols-1 md:grid-cols-2 md:m-0 m-4 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:m-0 m-4 lg:grid-cols-3 gap-8">
         {filteredCountries.map((country) => (
           <CountryCard key={country.cca3} country={country} />
         ))}
